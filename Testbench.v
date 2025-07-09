@@ -36,7 +36,7 @@ module gshare_branch_predictor_tb;
             current_ghr = uut.GHR;
             correct = (predict_taken == test_outcome);
             
-            $display("| %2h | %8b |%2h| %1b  |   %1b   |    %1s    |",
+            $display("| %2h | %8b |    %2h     |       %1b       |       %1b       |    %1s    |",
                     test_pc, current_ghr, uut.index, predict_taken, 
                     test_outcome, correct ? "Y" : "N"
                     );
@@ -51,7 +51,8 @@ module gshare_branch_predictor_tb;
     initial begin
         reset = 1;
         #10 reset = 0;
-
+        
+        $display("| PC |   GHR    | PHT Index | Predict Taken | Branch Taken  | Outcome | ");
         repeat(5) test_branch(8'h10, 1);
         repeat(5) test_branch(8'h20, 0);
         repeat(5) begin
